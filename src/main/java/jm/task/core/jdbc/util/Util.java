@@ -1,9 +1,6 @@
 package jm.task.core.jdbc.util;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-
 import java.sql.*;
 
 public class Util {
@@ -16,6 +13,21 @@ public class Util {
     private static final String PASSWORD = "Kingobiloba@61bb";
     private static  final StringBuilder URL = new StringBuilder(DBTYPE).append(HOSTNAME).
             append(PORT).append(NAME).append(SSL);
+    private static SessionFactory sessionFactory;
+
+    static {
+        try {
+            Configuration configuration = new Configuration();
+            configuration.configure();
+            sessionFactory = configuration.buildSessionFactory();
+        } catch (Throwable e) {
+            throw new ExceptionInInitializerError(e);
+        }
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
     public static void registerDriver() {
         try {
@@ -55,5 +67,4 @@ public class Util {
             throwables.printStackTrace();
         }
     }
-
 }

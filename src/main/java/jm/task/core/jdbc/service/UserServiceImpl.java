@@ -2,11 +2,7 @@ package jm.task.core.jdbc.service;
 
 import jm.task.core.jdbc.dao.UserDao;
 import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
-import jm.task.core.jdbc.dao.UserDaoHibernateImpl;
 import jm.task.core.jdbc.model.User;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
