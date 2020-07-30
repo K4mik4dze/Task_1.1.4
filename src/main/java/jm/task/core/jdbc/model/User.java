@@ -1,9 +1,18 @@
 package jm.task.core.jdbc.model;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.annotations.Entity;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import static jm.task.core.jdbc.Main.sessionFactory;
+
+
+//@Entity
+//@Table(name = "user", schema = "public")
 @Table
 public class User {
     @Id
@@ -22,7 +31,8 @@ public class User {
 
     }
 
-    public User(String name, String lastName, Byte age) {
+    public User(Long id, String name, String lastName, Byte age) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -58,5 +68,26 @@ public class User {
 
     public void setAge(Byte age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    public void addUser(Long id, String name, String lastName, Byte age) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = null;
+
+        transaction = session.beginTransaction();
+        User user = new User(id, name, lastName, age);
+        session.save(user);
+        transaction.commit();
+        session.close();
     }
 }

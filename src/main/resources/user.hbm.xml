@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="jm.task.core.jdbc.model.User" table="user">
+        <meta attribute="class-description">
+            This class contains user's details.
+        </meta>
+        <id name="id" type="long" column="id">
+<!--        Тег <id > связывает уникальный идентификатор ID в POJO – классе и
+первичный ключ (primary key) в таблице БД. Свойство name соединяет поле класса
+со свойством column, которое указывает нам колонку в таблице БД. Свойство type
+определяет тип связывания (mapping) и используется для конфертации типа данных
+Java в тип данных SQL.-->
+            <generator class="native"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="lastName" column="lastname" type="string"/>
+        <property name="age" column="age" type="byte"/>
+    </class>
+</hibernate-mapping>
